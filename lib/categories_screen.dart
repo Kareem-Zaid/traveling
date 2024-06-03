@@ -9,30 +9,21 @@ class CategoriesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('دليل سياحي'),
-        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    return GridView(
+      padding: const EdgeInsets.all(10),
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 200,
+        childAspectRatio: 7 / 8,
+        mainAxisSpacing: 10,
+        crossAxisSpacing: 10,
       ),
-      // floatingActionButton: FloatingActionButton(onPressed: () {}),
-      body:
-          // Container(color: Colors.amber, width: 366, height: 772) // This size is based on phone's 9:19 aspect ratio, which is usually smth like 393 x 830
-          GridView(
-        padding: const EdgeInsets.all(10),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 200,
-          childAspectRatio: 7 / 8,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        children: categoriesData
-            .map((categoryData) => CategoryItem(
-                  title: categoryData.title,
-                  imageLink: categoryData.imageURL,
-                  id: categoryData.id,
-                ))
-            .toList(),
-      ),
+      children: categoriesData
+          .map((categoryData) => CategoryItem(
+                title: categoryData.title,
+                imageLink: categoryData.imageURL,
+                id: categoryData.id,
+              ))
+          .toList(),
     );
   }
 }

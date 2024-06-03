@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-// import 'package:traveling/app_data.dart';
-import 'models.dart';
-import 'trip_item.dart';
+import 'package:traveling/app_data.dart';
+import '../trip_item.dart';
+// import 'models.dart';
 
 class TripsScreen extends StatelessWidget {
-  const TripsScreen({super.key, required this.availableTrips});
+  const TripsScreen({super.key});
   // final String catId, catTitle;
   static const route = '/trips';
-  final List<Trip> availableTrips;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,7 @@ class TripsScreen extends StatelessWidget {
     final catTitle = routeArgument['title'];
     // This replaces that: "final String catId, catTitle;"
     final displayTrips =
-        availableTrips.where((e) => e.categories.contains(catId)).toList();
+        tripsData.where((e) => e.categories.contains(catId)).toList();
 
     return Scaffold(
       appBar: AppBar(title: Text(catTitle!)),
