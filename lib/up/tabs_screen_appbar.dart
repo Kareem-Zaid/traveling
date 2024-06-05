@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:traveling/categories_screen.dart';
 import 'package:traveling/favorites_screen.dart';
@@ -24,3 +25,4 @@ class TabsScreen extends StatelessWidget {
     );
   }
 }
+*/

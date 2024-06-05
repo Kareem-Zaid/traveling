@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:traveling/models.dart';
-
 import 'trip_details_screen.dart';
 
 class TripItem extends StatelessWidget {
@@ -13,12 +11,15 @@ class TripItem extends StatelessWidget {
       required this.duration,
       required this.season,
       required this.id,
-      required this.tripType});
+      required this.tripType,
+      this.refresh});
 
   final String title, imageLink, id;
   final int duration;
   final Season season;
   final TripType tripType;
+  final VoidCallback? refresh;
+  // VoidCallback = void Function()
 
   String get seasonText {
     switch (season) {
@@ -57,7 +58,8 @@ class TripItem extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: InkWell(
         onTap: () => Navigator.of(context)
-            .pushNamed(TripDetailsScreen.route, arguments: id),
+            .pushNamed(TripDetailsScreen.route, arguments: id)
+            .then((value) => refresh!()),
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

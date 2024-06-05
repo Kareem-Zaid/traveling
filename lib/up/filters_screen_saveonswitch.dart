@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+// import 'package:traveling/app_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({super.key, required this.applyFilter});
+  const FiltersScreen({super.key, availableTrips, required this.applyFilter});
   static const route = '/filters';
   final Function applyFilter;
 
@@ -9,9 +10,9 @@ class FiltersScreen extends StatefulWidget {
   State<FiltersScreen> createState() => _FiltersScreenState();
 }
 
-bool summer = true;
-bool winter = true;
-bool families = true;
+bool summer = false;
+bool winter = false;
+bool families = false;
 
 class _FiltersScreenState extends State<FiltersScreen> {
   Map<String, bool> selectedFilters = {
@@ -31,7 +32,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
               summer = value;
             });
             selectedFilters['summer'] = summer;
+            // print('After adding summer: $selectedFilters');
             widget.applyFilter(selectedFilters);
+            // I realized by try&error that when "setState" is "buildSwitchListTile"-inclusive, the switch stops changing its state
           }),
           buildSwitchListTile('الرحلات الشتوية', 'عرض الرحلات الشتوية', winter,
               (value) {
@@ -39,6 +42,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               winter = value;
             });
             selectedFilters['winter'] = winter;
+            // print('After adding winter: $selectedFilters');
             widget.applyFilter(selectedFilters);
           }),
           buildSwitchListTile(
@@ -47,6 +51,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
               families = value;
             });
             selectedFilters['families'] = families;
+            // print('After adding families: $selectedFilters');
             widget.applyFilter(selectedFilters);
           }),
         ],
@@ -57,10 +62,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
   SwitchListTile buildSwitchListTile(String title, String subtitle,
       bool currentValue, Function(bool) updateValue) {
     return SwitchListTile(
-      title: Text(title),
-      subtitle: Text(subtitle),
-      value: currentValue,
-      onChanged: updateValue,
-    );
+        title: Text(title),
+        subtitle: Text(subtitle),
+        value: currentValue,
+        onChanged: updateValue);
   }
 }

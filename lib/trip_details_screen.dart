@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:traveling/app_data.dart';
-// import 'package:traveling/models.dart';
 
 class TripDetailsScreen extends StatelessWidget {
-  const TripDetailsScreen({super.key});
+  const TripDetailsScreen(
+      {super.key, required this.manageFavorites, required this.isFavorite});
   static const route = '/trip-details';
+  final Function manageFavorites;
+  final bool isFavorite;
   @override
   Widget build(BuildContext context) {
     final tripId = ModalRoute.of(context)?.settings.arguments as String;
@@ -13,6 +15,13 @@ class TripDetailsScreen extends StatelessWidget {
     // print(selectedTrip);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: isFavorite
+              ? const Icon(Icons.star)
+              : const Icon(Icons.star_border),
+          onPressed: () {
+            manageFavorites(selectedTrip);
+          }),
       appBar: AppBar(title: Text(selectedTrip.title)),
       body: SingleChildScrollView(
         // SingleChildScrollView is used as a parent to prevent vertical overflow

@@ -1,3 +1,6 @@
+/*
+// ignore_for_file: avoid_print
+
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -6,8 +9,8 @@ import 'package:traveling/filters_screen.dart';
 import 'package:traveling/tabs_screen.dart';
 import 'package:traveling/trip_details_screen.dart';
 import 'package:traveling/trips_screen.dart';
-import 'app_data.dart';
-import 'models.dart';
+import '../app_data.dart';
+import '../models.dart';
 // import 'categories_screen.dart';
 
 void main() {
@@ -33,37 +36,29 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   List<Trip> availableTrips = tripsData;
+  // Map<String, bool> filters = {
+  //   'summer': false,
+  //   'winter': false,
+  //   'families': false,
+  // };
   void changeFilters(Map<String, bool> selectedFilters) {
+    print('Method started');
     setState(() {
       availableTrips = tripsData.where((trip) {
-        if (trip.isInSummer == true && selectedFilters['summer'] == true) {
-          return true;
+        print('The should-be-true value: ${selectedFilters['summer']}');
+        if (trip.isInSummer != true && selectedFilters['summer'] == true) {
+          print('Success: ${selectedFilters['summer']}');
+          return false;
         }
-        if (trip.isInWinter == true && selectedFilters['winter'] == true) {
-          return true;
+        if (trip.isInWinter != true && selectedFilters['winter'] == true) {
+          return false;
         }
-        if (trip.isForFamilies == true && selectedFilters['families'] == true) {
-          return true;
+        if (trip.isForFamilies != true && selectedFilters['families'] == true) {
+          return false;
         }
-        return false;
+        return true;
       }).toList();
     });
-  }
-
-  bool isFavorite = false;
-  List<Trip> favoriteTrips = [];
-  void manageFavorites(Trip trip) {
-    if (favoriteTrips.contains(trip)) {
-      setState(() {
-        favoriteTrips.remove(trip);
-        isFavorite = false;
-      });
-    } else {
-      setState(() {
-        favoriteTrips.add(trip);
-        isFavorite = true;
-      });
-    }
   }
 
   @override
@@ -88,14 +83,12 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: '/',
       routes: {
-        // Now this goes as the router for each page, instead of of "MaterialPageRoute" method
-        '/': (context) => TabsScreen(favoriteTrips: favoriteTrips),
+        // Now this goes as the router for the page, instead of of "MaterialPageRoute" method
+        '/': (context) => const TabsScreen(),
         TripsScreen.route: (context) =>
             TripsScreen(availableTrips: availableTrips),
-        TripDetailsScreen.route: (context) => TripDetailsScreen(
-            manageFavorites: manageFavorites, isFavorite: isFavorite),
-        FavoritesScreen.route: (context) =>
-            FavoritesScreen(favoriteTrips: favoriteTrips),
+        TripDetailsScreen.route: (context) => const TripDetailsScreen(),
+        FavouritesScreen.route: (context) => const FavouritesScreen(),
         FiltersScreen.route: (context) =>
             FiltersScreen(applyFilter: changeFilters),
       },
@@ -104,3 +97,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+*/

@@ -31,6 +31,7 @@ class TripsScreen extends StatelessWidget {
           duration: displayTrips[index].duration,
           season: displayTrips[index].season,
           tripType: displayTrips[index].tripType,
+          // refresh: () {},
         ),
         itemCount: displayTrips.length,
       ),

@@ -1,3 +1,4 @@
+/*
 import 'package:flutter/material.dart';
 import 'package:traveling/app_data.dart';
 import '../trip_item.dart';
@@ -36,3 +37,4 @@ class TripsScreen extends StatelessWidget {
     );
   }
 }
+*/
