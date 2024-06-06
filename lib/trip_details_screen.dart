@@ -7,7 +7,7 @@ class TripDetailsScreen extends StatelessWidget {
       {super.key, required this.manageFavorites, required this.isFavorite});
   static const route = '/trip-details';
   final Function manageFavorites;
-  final bool isFavorite;
+  final Function isFavorite;
   @override
   Widget build(BuildContext context) {
     final tripId = ModalRoute.of(context)?.settings.arguments as String;
@@ -16,7 +16,7 @@ class TripDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          child: isFavorite
+          child: isFavorite(tripId)
               ? const Icon(Icons.star)
               : const Icon(Icons.star_border),
           onPressed: () {

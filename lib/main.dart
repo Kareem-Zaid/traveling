@@ -50,20 +50,17 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  bool isFavorite = false;
   List<Trip> favoriteTrips = [];
   void manageFavorites(Trip trip) {
-    if (favoriteTrips.contains(trip)) {
-      setState(() {
-        favoriteTrips.remove(trip);
-        isFavorite = false;
-      });
-    } else {
-      setState(() {
-        favoriteTrips.add(trip);
-        isFavorite = true;
-      });
-    }
+    setState(() {
+      favoriteTrips.contains(trip)
+          ? favoriteTrips.remove(trip)
+          : favoriteTrips.add(trip);
+    });
+  }
+
+  bool isFavorite(String tripId) {
+    return favoriteTrips.any((element) => element.id == tripId);
   }
 
   @override
